@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.polyvi.xface.extension.calendar"
+    version="1.0.0">
+    <name>Calendar</name>
+    <description>xFace Calendar Extension</description>
+    <license>GPL v3</license>
+    <keywords>cordova,xface,calendar</keywords>
+
+    <js-module src="www/Calendar.js" name="Calendar">
+        <clobbers target="xFace.ui.Calendar" />
+    </js-module>
+
+     <!-- ios -->
+     <platform name="ios">
+         <config-file target="config.xml" parent="/*">
+             <feature name="Calendar">
+                 <param name="ios-package" value="XCalendarExt"/>
+             </feature>
+         </config-file>
+
+         <header-file src="src/ios/private/XCalendarExt_Privates.h" />
+         <header-file src="src/ios/XCalendarExt.h" />
+         <source-file src="src/ios/XCalendarExt.m" />
+     </platform>
+</plugin>
