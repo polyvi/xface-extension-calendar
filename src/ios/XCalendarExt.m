@@ -31,6 +31,7 @@
 #import <Cordova/CDVInvokedUrlCommand.h>
 #import <Cordova/CDVPluginResult.h>
 #import <Cordova/NSArray+Comparisons.h>
+#import <Cordova/CDVDebug.h>
 
 #define VIEW_DEFAULT_WIDTH          320
 #define VIEW_DEFAULT_HEIGHT         480
@@ -62,7 +63,7 @@
 - (void)dateChanged:(id)sender
 {
     NSDate *date = ((UIDatePicker*)sender).date;
-    XLogI(@"dateChanged:%@", date);
+    DLog(@"dateChanged:%@", date);
 }
 
 - (void)doCancelClick:(id)sender
@@ -79,7 +80,7 @@
         [action dismissWithClickedButtonIndex:0 animated:YES];
     }
 
-    XLogI(@"datepicker canceled !!");
+    DLog(@"datepicker canceled !!");
     CDVPluginResult *result = [CDVPluginResult resultWithStatus: CDVCommandStatus_NO_RESULT];
     [self.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
@@ -99,7 +100,7 @@
     }
 
     NSDate *selected = [datePicker date];
-    XLogI(@"you selected date:%@", selected);
+    DLog(@"you selected date:%@", selected);
 
     CDVPluginResult *result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsDictionary:
                                 [self getDateComponentsFrom:selected]];
