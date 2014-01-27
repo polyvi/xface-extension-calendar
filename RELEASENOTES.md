@@ -24,3 +24,7 @@
 ### 1.0.0 Tue Jan 07 2014 16:08:06 GMT+0800 (CST)
  *  [android]Modify source codes package path
  *  added jasmine tests unique id
+### 1.0.1 Mon Jan 27 2014 15:56:03 GMT+0800 (CST)
+ *  batch modify .reviewboard
+ *  [android]Sync xFace3.1 calendar plugin
+ *  Incremented plugin version on dev branch to 1.0.1-dev
