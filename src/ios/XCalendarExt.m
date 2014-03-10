@@ -62,8 +62,7 @@
 
 - (void)dateChanged:(id)sender
 {
-    NSDate *date = ((UIDatePicker*)sender).date;
-    DLog(@"dateChanged:%@", date);
+    DLog(@"dateChanged:%@", ((UIDatePicker *)sender).date);
 }
 
 - (void)doCancelClick:(id)sender
