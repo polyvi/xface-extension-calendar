@@ -36,7 +36,7 @@ import android.app.TimePickerDialog;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-public class XCalendarExt extends CordovaPlugin {
+public class CalendarExt extends CordovaPlugin {
 
     private static final String COMMAND_GET_TIME = "getTime";
     private static final String COMMAND_GET_DATE = "getDate";
