@@ -32,7 +32,9 @@
          </config-file>
          <header-file src="src/ios/private/XCalendarExt_Privates.h" />
          <header-file src="src/ios/XCalendarExt.h" />
+ 	 <header-file src="src/ios/ActionSheetPicker.h" />
          <source-file src="src/ios/XCalendarExt.m" />
+ 	 <framework src="src/ios/picker.framework" custom="true" />
      </platform>
 
     <!-- wp8 -->

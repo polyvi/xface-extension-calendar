@@ -33,12 +33,15 @@
 #import <Cordova/NSArray+Comparisons.h>
 #import <Cordova/CDVDebug.h>
 
+
+
+
+
 #define VIEW_DEFAULT_WIDTH          320
 #define VIEW_DEFAULT_HEIGHT         480
 #define TOOLBAR_HEIGHT              44
 #define POPOVER_CONTENT_WIDTH       320
 #define POPOVER_CONTENT_HEIGHT      244
-
 
 @implementation XCalendarExt
 
@@ -50,6 +53,24 @@
     [self showDatePikcer];
     [datePicker setDatePickerMode:UIDatePickerModeTime];
     [datePicker setDate:[NSDate date]];
+}
+
+- (void)selectADate {
+    self.selectedDate = [NSDate date];
+    self.selectedTime = [NSDate date];
+    self.actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"" datePickerMode:UIDatePickerModeDate selectedDate:self.selectedDate target:self action:@selector(dateWasSelected:element:) origin:self.viewController.view];
+    
+    self.actionSheetPicker.hideCancel = YES;
+    [self.actionSheetPicker showActionSheetPicker];
+}
+- (void)dateWasSelected:(NSDate *)selectedDate element:(id)element
+{
+    NSDate *selected = selectedDate;
+    DLog(@"you selected date:%@", selected);
+    
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsDictionary:
+                               [self getDateComponentsFrom:selected]];
+    [self.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
 
 - (void) getDate:(CDVInvokedUrlCommand*)command
@@ -159,40 +180,8 @@
 
 - (void)showDatePikcer
 {
-    if(CDV_IsIPad())
-    {
-        //iPad
-        if (nil == popoverController)
-        {
-            [self createDatePickerView];
-            UIViewController *popoverContent = [[UIViewController alloc] init];
-            popoverContent.view = datePickerView;
-            popoverContent.contentSizeForViewInPopover = CGSizeMake(POPOVER_CONTENT_WIDTH, POPOVER_CONTENT_HEIGHT);
-            popoverController = [[UIPopoverController alloc] initWithContentViewController:popoverContent];
-        }
-        [self.popoverController presentPopoverFromRect:CGRectMake(0,0,VIEW_DEFAULT_WIDTH,VIEW_DEFAULT_HEIGHT)
-                                                inView:[self.viewController.view superview]
-                              permittedArrowDirections:UIPopoverArrowDirectionAny
-                                              animated:YES];
-    }
-    else
-    {
-        //iphone
-        if (nil == action)
-        {
-            [self createDatePickerView];
-            action = [[UIActionSheet alloc] initWithTitle:@""
-                                                 delegate:nil
-                                        cancelButtonTitle:nil
-                                   destructiveButtonTitle:nil
-                                        otherButtonTitles:nil];
-            [action addSubview:datePickerView];
-        }
-
-        UIWindow* appWindow = [self.viewController.view window];
-        [action showInView: appWindow];
-        [action setBounds:CGRectMake(0, 0, VIEW_DEFAULT_WIDTH, VIEW_DEFAULT_HEIGHT)];
-    }
+    [self selectADate];
+    return;
 }
 
 @end

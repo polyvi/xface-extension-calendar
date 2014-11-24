@@ -27,6 +27,7 @@
 
 #import <Foundation/Foundation.h>
 #import "XCalendarExt.h"
+#import "ActionSheetPicker.h"
 
 @interface XCalendarExt ()
 {
@@ -37,7 +38,9 @@
 }
 
 @property (strong) UIPopoverController* popoverController;
-
+@property (nonatomic, strong) NSDate *selectedDate;
+@property (nonatomic, strong) NSDate *selectedTime;
+@property (nonatomic, strong) AbstractActionSheetPicker *actionSheetPicker;
 /**
     创建DatePickerView.
  */
